@@ -1,5 +1,5 @@
 {
-    "name": "ariffazmi/secure-encrypt",
+	"name": "ariffazmi/secureEncrypt",
     "description": "Simple secure assymetric encryption for php using",
     "authors": [
         {
@@ -9,12 +9,14 @@
     ],
     "keywords": ["assymetric", "encryption", "php"],
     "require": {
-        "php": ">=5.3.0",
-		"ariffazmi/secureEncrypt"  : "1.*"
+        "php": ">=5.3.0"
     },
     "autoload": {
         "psr-4": {
             "Secure\\": "src/"
         }
+    },
+    "scripts": {
+    	"make-example":"Secure\\Encrypt::makeExample"
     }
 }
