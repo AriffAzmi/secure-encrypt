@@ -1,4 +1,4 @@
-# Php secure assymetric encryption
+# Php secure asymmetric encryption
 
 ## Install the Application
 
