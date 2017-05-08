@@ -71,4 +71,35 @@ class Encrypt
         
         return $plaintext;
     }
+	
+	public static function makeExample(){
+
+        $handle = fopen(realpath(dirname(__FILE__)."../")."example.php" , 'w+');
+        $data =
+        "<?php
+            
+            require_once __DIR__.'/vendor/autoload.php';
+            use Secure\Encrypt;
+
+            function hashing()
+            {
+                return (new Encrypt());
+            }
+
+            //Basic Example
+            echo '===================================='.PHP_EOL;
+            echo hashing()->encrypt('Test Encrypt','mysecretkey').PHP_EOL;
+            echo hashing()->decrypt(hashing()->encrypt('Test Encrypt','mysecretkey'),'mysecretkey').PHP_EOL;
+            echo '===================================='.PHP_EOL;
+
+            //Example for base64 output
+            echo '===================================='.PHP_EOL;
+            echo hashing()->encrypt('Test Encrypt','mysecretkey',true).PHP_EOL;
+            echo hashing()->decrypt(hashing()->encrypt('Test Encrypt','mysecretkey',true),'mysecretkey',true).PHP_EOL;
+            echo '===================================='.PHP_EOL;
+        ?>";
+        fwrite($handle, $data);
+        fclose($handle);
+        echo "\nSuccessfully generate example files\n";
+    }
 }
