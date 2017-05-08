@@ -1,0 +1,19 @@
+{
+	"name": "ariffazmi/secureEncrypt",
+    "description": "Simple secure assymetric encryption for php using",
+    "authors": [
+        {
+            "name": "Ariff Azmi",
+            "email": "ariff.azmi16@gmail.com"
+        }
+    ],
+    "keywords": ["assymetric", "encryption", "php"],
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Secure\\": "src/"
+        }
+    }
+}
