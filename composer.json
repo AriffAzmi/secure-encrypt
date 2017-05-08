@@ -18,5 +18,6 @@
     },
     "scripts": {
     	"make-example":"Secure\\Encrypt::makeExample"
-    }
+    },
+	"license": "MIT"
 }
