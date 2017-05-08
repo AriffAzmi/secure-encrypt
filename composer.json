@@ -7,7 +7,7 @@
             "email": "ariff.azmi16@gmail.com"
         }
     ],
-    "keywords": ["assymetric", "encryption", "php"],
+    "keywords": ["asymmetric", "encryption", "php"],
     "require": {
         "php": ">=5.3.0"
     },
