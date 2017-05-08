@@ -1,6 +1,6 @@
 {
 	"name": "ariffazmi/secureEncrypt",
-    "description": "Simple secure asymmetric encryption for php using",
+    "description": "Simple secure asymmetric encryption for php",
     "authors": [
         {
             "name": "Ariff Azmi",
