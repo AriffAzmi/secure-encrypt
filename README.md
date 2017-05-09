@@ -3,7 +3,7 @@
 ## Install the Application
 
 ### Composer
-Run `composer require ariffazmi/secure-encrypt:"1.0"`
+Run `composer require ariffazmi/secure-encrypt`
 
 # How To Use
 
@@ -28,7 +28,7 @@ Or
 
 You can skip the above by doing this:
     
-    composer create-project ariffazmi/secure-encrypt:"1.0"
+    composer create-project ariffazmi/secure-encrypt
     
 After successfull install, run this command : `composer make-example`.
 You will have example.php file in your project directory.
