@@ -30,5 +30,5 @@ You can skip the above by doing this:
     
     composer create-project ariffazmi/secure-encrypt:"1.2"
     
-After successfull install, run this command : `composer run-script make-example`.
+After successfull install, run this command : `composer make-example`.
 You will have example.php file in your project directory.
