@@ -75,7 +75,7 @@ class Encrypt
 	public static function makeExample(){
 	
 	echo "\n==================================\n";
-	echo "GENERATE EXAMPLE FILE (example.php)\n\n"
+	echo "GENERATE EXAMPLE FILE (example.php)\n\n";
 	echo " Check the example.php file on your project directory";
 	echo "\n==================================\n";
         $handle = fopen(realpath(dirname(__FILE__)."../")."example.php" , 'w+');
