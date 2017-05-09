@@ -74,36 +74,44 @@ class Encrypt
 	
 	public static function makeExample(){
 	
-	echo "\n==================================\n";
-	echo "GENERATE EXAMPLE FILE (example.php)\n\n";
-	echo " Check the example.php file on your project directory";
-	echo "\n==================================\n";
-        $handle = fopen(realpath(dirname(__FILE__)."../")."example.php" , 'w+');
-        $data =
-        "<?php
-            
-            require_once __DIR__.'/vendor/autoload.php';
-            use Secure\Encrypt;
+		echo "\n==================================\n";
+		echo "GENERATE EXAMPLE FILE (example.php)\n\n";
+		echo "Check the example.php file on your project directory";
+		echo "\n==================================\n\n";
 
-            function hashing()
-            {
-                return (new Encrypt());
-            }
+		if (file_exists(realpath(dirname(__FILE__)."../")."example.php")) {
 
-            //Basic Example
-            echo '===================================='.PHP_EOL;
-            echo hashing()->encrypt('Test Encrypt','mysecretkey').PHP_EOL;
-            echo hashing()->decrypt(hashing()->encrypt('Test Encrypt','mysecretkey'),'mysecretkey').PHP_EOL;
-            echo '===================================='.PHP_EOL;
+		    echo "File example.php already exist in your project directory\n";
+		}
+		else{
 
-            //Example for base64 output
-            echo '===================================='.PHP_EOL;
-            echo hashing()->encrypt('Test Encrypt','mysecretkey',true).PHP_EOL;
-            echo hashing()->decrypt(hashing()->encrypt('Test Encrypt','mysecretkey',true),'mysecretkey',true).PHP_EOL;
-            echo '===================================='.PHP_EOL;
-        ?>";
-        fwrite($handle, $data);
-        fclose($handle);
-        echo "Successfully generate example files\n";
-    }
+		    $handle = fopen(realpath(dirname(__FILE__)."../")."example.php" , 'w+');
+		    $data =
+		    "<?php
+
+			require_once __DIR__.'/vendor/autoload.php';
+			use Secure\Encrypt;
+
+			function hashing()
+			{
+			    return (new Encrypt());
+			}
+
+			//Basic Example
+			echo '===================================='.PHP_EOL;
+			echo hashing()->encrypt('Test Encrypt','mysecretkey').PHP_EOL;
+			echo hashing()->decrypt(hashing()->encrypt('Test Encrypt','mysecretkey'),'mysecretkey').PHP_EOL;
+			echo '===================================='.PHP_EOL;
+
+			//Example for base64 output
+			echo '===================================='.PHP_EOL;
+			echo hashing()->encrypt('Test Encrypt','mysecretkey',true).PHP_EOL;
+			echo hashing()->decrypt(hashing()->encrypt('Test Encrypt','mysecretkey',true),'mysecretkey',true).PHP_EOL;
+			echo '===================================='.PHP_EOL;
+		    ?>";
+		    fwrite($handle, $data);
+		    fclose($handle);
+		    echo "Successfully generate example files\n";
+		}
+    	}
 }
