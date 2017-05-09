@@ -3,73 +3,63 @@
 namespace Secure;
 
 /**
-*  Simple Assymetric Encryption Class
+*  Simple Asymmetric Encryption Class
 *  @author  Ariff Azmi <ariff.azmi16@gmail.com>
 *  @version 1.0
 */
 class Encrypt
 {
 	const METHOD = 'aes-256-ctr';
-        
+    protected $iv;
+    public $output;
+
+    function __construct()
+    {
+        $this->setIv(mcrypt_create_iv(16, MCRYPT_RAND));
+    }
+
     /**
-     * Encrypts (but does not authenticate) a message
      * 
-     * @param string $message - plaintext message
+     * @param string $data - plaintext data
      * @param string $key - encryption key (raw binary expected)
      * @param boolean $encode - set to TRUE to return a base64-encoded 
      * @return string (raw binary)
      */
-    public static function encrypt($message, $key, $encode = false)
+    public static function encrypt($data, $key, $encode = false)
     {
-        $nonceSize = openssl_cipher_iv_length(self::METHOD);
-        $nonce = openssl_random_pseudo_bytes($nonceSize);
-        
-        $ciphertext = openssl_encrypt(
-            $message,
-            self::METHOD,
-            $key,
-            OPENSSL_RAW_DATA,
-            $nonce
-        );
-        
-        // Now let's pack the IV and the ciphertext together
-        // Naively, we can just concatenate
+        $iv = mcrypt_create_iv(16, MCRYPT_RAND);
+        $encryptedText = openssl_encrypt($data,self::METHOD,$key, 0, $this->getIv());
+
         if ($encode) {
-            return base64_encode($nonce.$ciphertext);
+            return base64_encode($encryptedText);
         }
-        return $nonce.$ciphertext;
+
+        $this->setOutput($encryptedText);
+
+        return $this->getOutput();
     }
     
     /**
-     * Decrypts (but does not verify) a message
      * 
-     * @param string $message - ciphertext message
+     * @param string $data - ciphertext data
      * @param string $key - encryption key (raw binary expected)
      * @param boolean $encoded - are we expecting an encoded string?
      * @return string
      */
-    public static function decrypt($message, $key, $encoded = false)
+    public static function decrypt($data, $key, $encoded = false)
     {
         if ($encoded) {
-            $message = base64_decode($message, true);
-            if ($message === false) {
+            $data = base64_decode($data, true);
+            if ($data === false) {
                 throw new Exception('Encryption failure');
             }
         }
 
-        $nonceSize = openssl_cipher_iv_length(self::METHOD);
-        $nonce = mb_substr($message, 0, $nonceSize, '8bit');
-        $ciphertext = mb_substr($message, $nonceSize, null, '8bit');
-        
-        $plaintext = openssl_decrypt(
-            $ciphertext,
-            self::METHOD,
-            $key,
-            OPENSSL_RAW_DATA,
-            $nonce
-        );
-        
-        return $plaintext;
+        $decryptedText = openssl_decrypt($data, self::METHOD, $key, 0, $this->getIv());
+
+        $this->setOutput($decryptedText);
+
+        return $this->getOutput();
     }
 	
 	public static function makeExample(){
@@ -114,4 +104,52 @@ class Encrypt
 		    echo "Successfully generate example files\n";
 		}
     	}
+
+    /**
+     * Gets the value of iv.
+     *
+     * @return mixed
+     */
+    public function getIv()
+    {
+        return $this->iv;
+    }
+
+    /**
+     * Sets the value of iv.
+     *
+     * @param mixed $iv the iv
+     *
+     * @return self
+     */
+    protected function setIv($iv)
+    {
+        $this->iv = $iv;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of output.
+     *
+     * @return mixed
+     */
+    public function getOutput()
+    {
+        return $this->output;
+    }
+
+    /**
+     * Sets the value of output.
+     *
+     * @param mixed $output the output
+     *
+     * @return self
+     */
+    public function setOutput($output)
+    {
+        $this->output = $output;
+
+        return $this;
+    }
 }
