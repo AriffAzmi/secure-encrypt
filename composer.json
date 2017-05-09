@@ -16,6 +16,7 @@
             "Secure\\": "src/"
         }
     },
+	"minimum-stability": "dev",
     "scripts": {
     	"make-example":"Secure\\Encrypt::makeExample"
     },
